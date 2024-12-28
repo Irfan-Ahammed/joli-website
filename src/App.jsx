@@ -1,16 +1,17 @@
-import React from 'react'
-import { motion } from 'framer-motion';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Jobs from "./pages/job/Jobs";
 
 function App() {
   return (
-    <motion.div
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    Hello Joli!
-  </motion.div>
-  )
+    <Router basename="/joli-website">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/jobs" element={<Jobs />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
