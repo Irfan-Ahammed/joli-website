@@ -1,17 +1,29 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Jobs from "./pages/job/Jobs";
+import ErrorPage from "./components/ErrorPage";
+
+const appRouter = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/jobs",
+      element: <Jobs />,
+    },
+    {
+      path: "*",
+      element: <ErrorPage />,
+    },
+  ],
+  { basename: "/joli-website" }
+);
 
 function App() {
-  return (
-    <Router basename="/joli-website">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/jobs" element={<Jobs />} />
-      </Routes>
-    </Router>
-  );
+  return <RouterProvider router={appRouter} />;
 }
 
 export default App;

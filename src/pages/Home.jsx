@@ -8,7 +8,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { box, imageVariants, textVariants } from "@/styles/framerMotion";
 
+import AuthDialog from "@/components/AuthDialog";
+
 function Home() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const navigate = useNavigate();
   const transitionImage = [
     screen1,
     screen2,
@@ -19,7 +24,7 @@ function Home() {
     screen1,
     screen2,
     screen1,
-    screen2
+    screen2,
   ];
   const transitionTexts = [
     "Chat to the Business Owner",
@@ -31,11 +36,9 @@ function Home() {
     "Explore Local Opportunities",
     "Start Your Career Today",
     "Get Hired Instantly",
-    "Simplify Your Job Search"
+    "Simplify Your Job Search",
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % transitionTexts.length);
@@ -52,18 +55,18 @@ function Home() {
         </Link>
 
         <div className="flex items-center space-x-3">
-          <Button className="flex items-center border bg-black rounded px-4">
+          <Button className="flex items-center border border-slate-700 hover:border-white hover:bg-black bg-black rounded px-4">
             <span>Get the app:</span>
             <div className="flex items-center ml-2">
-              <img src={AppStore} className="w-6 h-6" alt="App Store" />
+              <img src={AppStore} className="w-8 h-9" alt="App Store" />
               <img
                 src={playstore}
-                className="w-6 h-6 ml-2"
+                className="w-6 h-6 ml-2 "
                 alt="Google Play Store"
               />
             </div>
           </Button>
-          <Button className="rounded border px-4 bg-black">Login</Button>
+         <AuthDialog />
         </div>
       </div>
 
