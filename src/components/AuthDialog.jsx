@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 
 function AuthDialog() {
   const [isLogin, setIsLogin] = useState(true);
+  const [open, setOpen] = useState(false);
   const openSignUp = () => {
     setIsLogin(false);
   };
@@ -14,7 +15,7 @@ function AuthDialog() {
     setIsLogin(true);
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           variant="outline"
@@ -24,7 +25,7 @@ function AuthDialog() {
         </Button>
       </DialogTrigger>
       {isLogin ? (
-        <AuthLogin openSignUp={openSignUp} />
+        <AuthLogin setOpen={setOpen} openSignUp={openSignUp} />
       ) : (
         <AuthRegister openLogin={openLogin} />
       )}

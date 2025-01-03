@@ -1,25 +1,70 @@
 import CommonForm from "@/components/common/form";
-import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { registerFormControls } from "@/config";
 import { useState } from "react";
+import axios from "axios";
+import { USER_API_END_POINT } from "../../utils/constant";
+import { toast } from "sonner";
+import { useDispatch, useSelector } from "react-redux";
 
 const initialState = {
-  userName: "",
+  fullname: "",
   email: "",
+  phoneNumber: "",
   password: "",
 };
 
 function AuthRegister({ openLogin }) {
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState(initialState);
-  function onSubmit(event) {
+  const onSubmit = async (event) => {
     event.preventDefault();
-  }
-  console.log(formData);
+    const dataForm = new FormData();
+    dataForm.append("fullname", formData.fullname);
+    dataForm.append("email", formData.email);
+    dataForm.append("phoneNumber", formData.phoneNumber);
+    dataForm.append("password", formData.password);
+
+    try {
+      
+      const res = await axios.post(
+        `${USER_API_END_POINT}/register`,
+        {
+          fullname: formData.fullname,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber,
+          password: formData.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if (res.data.success) {
+        setFormData(initialState);
+        openLogin();
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      console.log(formData);
+
+      toast.error(error.response.data.message);
+    }
+  };
 
   return (
     <DialogContent className="border-slate-700">
       <DialogHeader>
-        <DialogTitle>
+        <DialogTitle className="mb-2 flex justify-center">
           Create new account
         </DialogTitle>
         <DialogDescription className="flex justify-center">
@@ -33,6 +78,7 @@ function AuthRegister({ openLogin }) {
         </DialogDescription>
       </DialogHeader>
       <CommonForm
+       loading={loading}
         formControls={registerFormControls}
         buttonText={"Sign Up"}
         formData={formData}

@@ -7,23 +7,53 @@ import {
 } from "@/components/ui/dialog";
 import { loginFormControls } from "@/config";
 import { useState } from "react";
+import { USER_API_END_POINT } from "@/utils/constant";
+import axios from "axios";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
 
 const initialState = {
   email: "",
   password: "",
 };
 
-function AuthLogin({ openSignUp }) {
+function AuthLogin({ openSignUp,setOpen }) {
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
 
-  function onSubmit(event) {
+  const onSubmit = async (event) => {
     event.preventDefault();
-  }
+    try {
+      dispatch(setLoading(true));
+      const res = await axios.post(`${USER_API_END_POINT}/login`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        navigate("/jobs");
+        setOpen(false)
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
 
   return (
-    <DialogContent className="sm:max-w-[425px]">
+    <DialogContent className="border-slate-700">
       <DialogHeader>
-        <DialogTitle>Sign in to your account</DialogTitle>
+        <DialogTitle className="mb-2 flex justify-center">
+          Sign in to your account
+        </DialogTitle>
 
         <DialogDescription className="flex justify-center">
           Don't have an account
@@ -37,6 +67,7 @@ function AuthLogin({ openSignUp }) {
       </DialogHeader>
 
       <CommonForm
+        loading={loading}
         formControls={loginFormControls}
         buttonText={"Sign In"}
         formData={formData}

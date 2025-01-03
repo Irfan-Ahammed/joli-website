@@ -10,6 +10,7 @@ import {
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { DialogFooter } from "../ui/dialog";
+import { Loader2 } from "lucide-react";
 
 function CommonForm({
   formControls,
@@ -18,6 +19,7 @@ function CommonForm({
   onSubmit,
   buttonText,
   isBtnDisabled,
+  loading,
 }) {
   function renderInputsByComponentType(getControlItem) {
     let element = null;
@@ -110,19 +112,30 @@ function CommonForm({
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className="mt-2" onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
-          <div className="grid w-full gap-1.5" key={controlItem.name}>
+          <div className="grid w-full gap-2" key={controlItem.name}>
             <Label className="mb-1">{controlItem.label}</Label>
             {renderInputsByComponentType(controlItem)}
           </div>
         ))}
       </div>
       <DialogFooter>
-        <Button disabled={isBtnDisabled} type="submit" className="mt-2 w-full">
-          {buttonText || "Submit"}
-        </Button>
+        {loading ? (
+          <Button disabled  className="mt-6 w-full">
+            <Loader2 className="animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button
+            disabled={isBtnDisabled}
+            type="submit"
+            className="mt-6 w-full"
+          >
+            {buttonText || "Submit"}
+          </Button>
+        )}
       </DialogFooter>
     </form>
   );
