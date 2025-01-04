@@ -26,7 +26,4 @@ export const imageVariants = {
   }
 };
 
-export const box = {
-  backgroundColor: "#0a66c2",
-  borderRadius: 50
-};
+

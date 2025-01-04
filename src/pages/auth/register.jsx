@@ -11,6 +11,7 @@ import axios from "axios";
 import { USER_API_END_POINT } from "../../utils/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "@/redux/authSlice";
 
 const initialState = {
   fullname: "",
@@ -32,7 +33,7 @@ function AuthRegister({ openLogin }) {
     dataForm.append("password", formData.password);
 
     try {
-      
+      dispatch(setLoading(true));
       const res = await axios.post(
         `${USER_API_END_POINT}/register`,
         {
@@ -58,6 +59,8 @@ function AuthRegister({ openLogin }) {
       console.log(formData);
 
       toast.error(error.response.data.message);
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -78,7 +81,7 @@ function AuthRegister({ openLogin }) {
         </DialogDescription>
       </DialogHeader>
       <CommonForm
-       loading={loading}
+        loading={loading}
         formControls={registerFormControls}
         buttonText={"Sign Up"}
         formData={formData}

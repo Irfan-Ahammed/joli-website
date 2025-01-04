@@ -6,7 +6,7 @@ import AppStore from "../assets/App-Store.svg";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { box, imageVariants, textVariants } from "@/styles/framerMotion";
+import {  imageVariants, textVariants } from "@/styles/framerMotion";
 
 import AuthDialog from "@/components/AuthDialog";
 
@@ -90,11 +90,10 @@ function Home() {
             </motion.div>
           </AnimatePresence>
           <motion.div
-            className="absolute top-32 md:-top-7 px-7  py-3 md:text-xl font-semibold flex items-center justify-center select-none"
+            className="absolute top-32 md:-top-7 px-7 bg-primary rounded-full py-3 md:text-xl font-semibold flex items-center justify-center select-none"
             onClick={() => navigate("/jobs")}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
-            style={box}
           >
             Get started
           </motion.div>

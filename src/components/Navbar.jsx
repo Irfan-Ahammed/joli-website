@@ -3,13 +3,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import playstore from "../assets/playstore.png";
 import AppStore from "../assets/App-Store.svg";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { textVariants } from "@/styles/framerMotion";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import AuthDialog from "./AuthDialog";
+import { Search } from "lucide-react";
 
 function Navbar() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const transitionTexts = [
+    "Search for jobs near you...",
+    "What type of work are you looking for?",
+    "Enter job title, skills, or location...",
+    "Find opportunities in your area today!",
+    "Type a job category or city to get started...",
+    "Discover your next job opportunity here!",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % transitionTexts.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [transitionTexts.length]);
+
   const user = false;
   return (
     <div className="container mx-auto ">
@@ -46,23 +66,33 @@ function Navbar() {
             </div>
           </Button>
           {user ? (
-             <Avatar>
-             <AvatarImage src="https://github.com/shadcn.png" alt="IMG" />
-             <AvatarFallback>CN</AvatarFallback>
-           </Avatar>
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="IMG" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
           ) : (
-            <AuthDialog/>
+            <AuthDialog />
           )}
         </div>
       </div>
 
       {/* Mobile Search Section */}
       <div className="flex md:hidden mx-4 mb-5">
-        <Input
-          type="text"
-          placeholder="Search jobs"
-          className="w-full h-12 border-slate-300 shadow-lg shadow-primary/10"
-        />
+        <div className="w-full h-12 border-slate-300 shadow-md items-center bg-primary/10 rounded-md relative flex shadow-primary/10">
+          <Search className="size-6 ml-2 text-slate-700"/>
+          <AnimatePresence>
+            <motion.div
+              key={transitionTexts[currentIndex]}
+              className="absolute top-3 w-full font-normal text-slate-500 text-md"
+              variants={textVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <p className="border-0 ml-10">{transitionTexts[currentIndex]}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

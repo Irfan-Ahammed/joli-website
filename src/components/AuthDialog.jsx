@@ -19,7 +19,7 @@ function AuthDialog() {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="rounded border px-4 bg-black border-slate-700 hover:bg-black hover:border-white hover:text-white"
+          className="rounded border px-4 bg-transparent border-slate-700 hover:bg-black hover:border-white hover:text-white"
         >
           Login
         </Button>

@@ -46,186 +46,46 @@ export const loginFormControls = [
   },
 ];
 
-export const addProductFormElements = [
-  {
-    label: "Title",
-    name: "title",
-    componentType: "input",
-    type: "text",
-    placeholder: "Enter product title",
-  },
-  {
-    label: "Description",
-    name: "description",
-    componentType: "textarea",
-    placeholder: "Enter product description",
-  },
-  {
-    label: "Category",
-    name: "category",
-    componentType: "select",
-    options: [
-      { id: "men", label: "Men" },
-      { id: "women", label: "Women" },
-      { id: "kids", label: "Kids" },
-      { id: "accessories", label: "Accessories" },
-      { id: "footwear", label: "Footwear" },
-    ],
-  },
-  {
-    label: "Brand",
-    name: "brand",
-    componentType: "select",
-    options: [
-      { id: "nike", label: "Nike" },
-      { id: "adidas", label: "Adidas" },
-      { id: "puma", label: "Puma" },
-      { id: "levi", label: "Levi's" },
-      { id: "zara", label: "Zara" },
-      { id: "h&m", label: "H&M" },
-    ],
-  },
-  {
-    label: "Price",
-    name: "price",
-    componentType: "input",
-    type: "number",
-    placeholder: "Enter product price",
-  },
-  {
-    label: "Sale Price",
-    name: "salePrice",
-    componentType: "input",
-    type: "number",
-    placeholder: "Enter sale price (optional)",
-  },
-  {
-    label: "Total Stock",
-    name: "totalStock",
-    componentType: "input",
-    type: "number",
-    placeholder: "Enter total stock",
-  },
+export const joliCategories = [
+  { id: 1, name: "Cleaning Services", icon: "🧹" },
+  { id: 2, name: "Food Delivery", icon: "🍔" },
+  { id: 3, name: "Construction Work", icon: "🏗️" },
+  { id: 4, name: "Retail Assistance", icon: "🛍️" },
+  { id: 5, name: "Transportation", icon: "🚛" },
+  { id: 6, name: "Child Care", icon: "👶" },
+  { id: 7, name: "Elder Care", icon: "🩺" },
+  { id: 8, name: "Gardening", icon: "🌿" },
+  { id: 9, name: "Event Assistance", icon: "🎉" },
+  { id: 10, name: "Pet Care", icon: "🐾" },
+  { id: 11, name: "Technical Support", icon: "🛠️" },
+  { id: 12, name: "Carpentry", icon: "🪚" },
+  { id: 13, name: "Plumbing", icon: "🚿" },
+  { id: 14, name: "Electrical Work", icon: "💡" },
+  { id: 15, name: "Painting Services", icon: "🎨" },
+  { id: 16, name: "Security Services", icon: "🛡️" },
+  { id: 17, name: "Cooking", icon: "🍳" },
+  { id: 18, name: "Laundry Services", icon: "🧺" },
+  { id: 19, name: "Driving Jobs", icon: "🚗" },
+  { id: 20, name: "Warehouse Jobs", icon: "📦" },
+  { id: 21, name: "Housekeeping", icon: "🛏️" },
+  { id: 22, name: "Babysitting", icon: "👶" },
+  { id: 23, name: "Office Assistance", icon: "🗂️" },
+  { id: 24, name: "Gardening and Lawn Care", icon: "🌱" },
+  { id: 25, name: "Delivery Riders", icon: "🛵" },
+  { id: 26, name: "Customer Support", icon: "📞" },
+  { id: 27, name: "House Painting", icon: "🎨" },
+  { id: 28, name: "Air Conditioning Maintenance", icon: "❄️" },
+  { id: 29, name: "Cleaning & Maintenance", icon: "🧽" },
+  { id: 30, name: "Data Entry", icon: "⌨️" },
+  { id: 31, name: "Tailoring", icon: "🧵" },
+  { id: 32, name: "Car Wash", icon: "🚗💦" },
+  { id: 33, name: "Furniture Assembly", icon: "🪑" },
+  { id: 34, name: "Mover Assistance", icon: "📦" },
+  { id: 35, name: "Tech Installation", icon: "📱" },
+  { id: 36, name: "Flooring Installation", icon: "🏠" },
+  { id: 37, name: "Warehouse Sorting", icon: "📦" },
+  { id: 38, name: "Grocery Shopping", icon: "🛒" },
+  { id: 39, name: "Courier Services", icon: "📬" },
+  { id: 40, name: "Moving Services", icon: "🚚" },
 ];
 
-export const shoppingViewHeaderMenuItems = [
-  {
-    id: "home",
-    label: "Home",
-    path: "/shop/home",
-  },
-  {
-    id: "products",
-    label: "Products",
-    path: "/shop/listing",
-  },
-  {
-    id: "men",
-    label: "Men",
-    path: "/shop/listing",
-  },
-  {
-    id: "women",
-    label: "Women",
-    path: "/shop/listing",
-  },
-  {
-    id: "kids",
-    label: "Kids",
-    path: "/shop/listing",
-  },
-  {
-    id: "footwear",
-    label: "Footwear",
-    path: "/shop/listing",
-  },
-  {
-    id: "accessories",
-    label: "Accessories",
-    path: "/shop/listing",
-  },
-  {
-    id: "search",
-    label: "Search",
-    path: "/shop/search",
-  },
-];
-
-export const categoryOptionsMap = {
-  men: "Men",
-  women: "Women",
-  kids: "Kids",
-  accessories: "Accessories",
-  footwear: "Footwear",
-};
-
-export const brandOptionsMap = {
-  nike: "Nike",
-  adidas: "Adidas",
-  puma: "Puma",
-  levi: "Levi",
-  zara: "Zara",
-  "h&m": "H&M",
-};
-
-export const filterOptions = {
-  category: [
-    { id: "men", label: "Men" },
-    { id: "women", label: "Women" },
-    { id: "kids", label: "Kids" },
-    { id: "accessories", label: "Accessories" },
-    { id: "footwear", label: "Footwear" },
-  ],
-  brand: [
-    { id: "nike", label: "Nike" },
-    { id: "adidas", label: "Adidas" },
-    { id: "puma", label: "Puma" },
-    { id: "levi", label: "Levi's" },
-    { id: "zara", label: "Zara" },
-    { id: "h&m", label: "H&M" },
-  ],
-};
-
-export const sortOptions = [
-  { id: "price-lowtohigh", label: "Price: Low to High" },
-  { id: "price-hightolow", label: "Price: High to Low" },
-  { id: "title-atoz", label: "Title: A to Z" },
-  { id: "title-ztoa", label: "Title: Z to A" },
-];
-
-export const addressFormControls = [
-  {
-    label: "Address",
-    name: "address",
-    componentType: "input",
-    type: "text",
-    placeholder: "Enter your address",
-  },
-  {
-    label: "City",
-    name: "city",
-    componentType: "input",
-    type: "text",
-    placeholder: "Enter your city",
-  },
-  {
-    label: "Pincode",
-    name: "pincode",
-    componentType: "input",
-    type: "text",
-    placeholder: "Enter your pincode",
-  },
-  {
-    label: "Phone",
-    name: "phone",
-    componentType: "input",
-    type: "text",
-    placeholder: "Enter your phone number",
-  },
-  {
-    label: "Notes",
-    name: "notes",
-    componentType: "textarea",
-    placeholder: "Enter any additional notes",
-  },
-];
