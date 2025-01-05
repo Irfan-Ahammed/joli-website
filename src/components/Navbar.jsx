@@ -5,14 +5,23 @@ import playstore from "../assets/playstore.png";
 import AppStore from "../assets/App-Store.svg";
 import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { textVariants } from "@/styles/framerMotion";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import AuthDialog from "./AuthDialog";
-import { Search } from "lucide-react";
+import { LogOut, Search, User } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import axios from "axios";
+import { USER_API_END_POINT } from "@/utils/constant";
+import { toast } from "sonner";
+import { logOut } from "@/redux/authSlice";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from "./ui/dialog";
+import ProfileDialog from "./ProfileDialog";
 
 function Navbar() {
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const transitionTexts = [
     "Search for jobs near you...",
@@ -30,7 +39,16 @@ function Navbar() {
     return () => clearInterval(interval);
   }, [transitionTexts.length]);
 
-  const user = false;
+ 
+  // const logOut = async () => {
+  //   try {
+  //     const res = await axios.post(`${USER_API_END_POINT}/logout`);
+
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <div className="container mx-auto ">
       <div className="flex justify-between items-center px-4 md:py-5 py-3 lg:px-28">
@@ -65,21 +83,14 @@ function Navbar() {
               />
             </div>
           </Button>
-          {user ? (
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="IMG" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          ) : (
-            <AuthDialog />
-          )}
+        <ProfileDialog/>
         </div>
       </div>
 
       {/* Mobile Search Section */}
       <div className="flex md:hidden  mx-4 mb-5">
         <div className="w-full h-12 border-slate-300 shadow-md items-center bg-primary/10 rounded-md relative flex shadow-primary/10">
-          <Search className="size-6 ml-2 text-slate-700"/>
+          <Search className="size-6 ml-2 text-slate-700" />
           <AnimatePresence>
             <motion.div
               key={transitionTexts[currentIndex]}

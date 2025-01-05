@@ -22,7 +22,7 @@ function FilterCardMobail() {
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline" className="border-primary/60 text-primary ">
-            <SlidersHorizontal/>
+            <SlidersHorizontal />
           </Button>
         </DialogTrigger>
         <DialogContent className="max-w-sm rounded-lg">
@@ -37,13 +37,13 @@ function FilterCardMobail() {
         </DialogContent>
       </Dialog>
       <div className="flex">
-        {
-            filters.slice(0,3).map((item,i)=>(
-                <div key={i} className="ml-3">
-                    <Button variant="outline" className="border-black/70 bg-[#f7faff]">{item.label}</Button>
-                </div>
-            ))
-        }
+        {filters.slice(0, 3).map((item, i) => (
+          <div key={i} className="ml-3">
+            <Button variant="outline" className="border-black/70 bg-[#f7faff]">
+              {item.label}
+            </Button>
+          </div>
+        ))}
       </div>
     </div>
   );

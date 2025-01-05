@@ -7,7 +7,7 @@ import React from "react";
 
 function Jobs() {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Navbar />
       <hr className="text-black/20"/>
       <CategorySeaction />

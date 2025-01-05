@@ -6,9 +6,10 @@ import AppStore from "../assets/App-Store.svg";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import {  imageVariants, textVariants } from "@/styles/framerMotion";
+import { imageVariants, textVariants } from "@/styles/framerMotion";
 
 import AuthDialog from "@/components/AuthDialog";
+import ProfileDialog from "@/components/ProfileDialog";
 
 function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -66,7 +67,7 @@ function Home() {
               />
             </div>
           </Button>
-         <AuthDialog />
+          <ProfileDialog />
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Jobs from "./pages/job/Jobs";
 import ErrorPage from "./components/ErrorPage";
+import Profile from "./pages/Profile";
 
 const appRouter = createBrowserRouter(
   [
@@ -13,6 +14,10 @@ const appRouter = createBrowserRouter(
     {
       path: "/jobs",
       element: <Jobs />,
+    },
+    {
+      path: "/jobs/profile",
+      element: <Profile />,
     },
     {
       path: "*",
