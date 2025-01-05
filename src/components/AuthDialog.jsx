@@ -17,12 +17,12 @@ function AuthDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="rounded border px-4 bg-transparent border-slate-700 hover:bg-black hover:border-white hover:text-white"
-        >
-          Login
-        </Button>
+          <Button
+            variant="outline"
+            className="rounded border px-4 bg-black text-white border-slate-700 hover:bg-black hover:border-white hover:text-white"
+          >
+            Login
+          </Button>
       </DialogTrigger>
       {isLogin ? (
         <AuthLogin setOpen={setOpen} openSignUp={openSignUp} />

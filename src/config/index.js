@@ -89,3 +89,12 @@ export const joliCategories = [
   { id: 40, name: "Moving Services", icon: "🚚" },
 ];
 
+export const filters = [
+  { label: "Location", options: ["Kerala", "Bangalore", "Chennai"] },
+  { label: "Job Type", options: ["Full-Time", "Part-Time", "Internship"] },
+  { label: "Work Mode", options: ["On-Site", "Remote", "Hybrid"] },
+  {
+    label: "Experience Level",
+    options: ["Entry-Level", "Mid-Level", "Senior"],
+  },
+];

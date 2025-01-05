@@ -1,57 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
 import JobCard from "./JobCard";
+import FilterCard from "./FilterCard";
+import FilterCardMobail from "./FilterCardMobail";
 
 function JobList() {
-  const [jobs] = useState([
-    {
-      _id: "1",
-      title: "Food Delivery Driver",
-      location: "Kochi",
-      description: "Deliver food to customers quickly and efficiently.",
-      jobType: "Part-Time",
-      wage: 12000,
-      requirements: ["Driver's license", "Smartphone", "Own vehicle"],
-    },
-    {
-      _id: "2",
-      title: "Construction Worker",
-      location: "Calicut",
-      description:
-        "Assist in various construction tasks including lifting, carrying, and operating tools.",
-      jobType: "Contract",
-      wage: 15000,
-      requirements: [
-        "Physical fitness",
-        "Experience with tools",
-        "Safety awareness",
-      ],
-    },
-    {
-      _id: "3",
-      title: "Office Assistant",
-      location: "Trivandrum",
-      description: "Help manage office operations and clerical tasks.",
-      jobType: "Full-Time",
-      wage: 18000,
-      requirements: [
-        "Computer skills",
-        "Organizational skills",
-        "Attention to detail",
-      ],
-    },
-  ]);
+  const jobs = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Available Jobs</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {jobs.length > 0 ? (
-          jobs.map((job) => <JobCard key={job._id} job={job} />)
-        ) : (
-          <p className="text-center col-span-full">
-            No jobs available at the moment.
-          </p>
-        )}
+    <div className="container  mx-auto px-4 md:px-8 lg:px-28 py-6">
+      <h1 className="text-3xl font-bold mb-6 text-center md:text-left">
+        Available Jobs
+      </h1>
+
+      <div className="flex flex-col md:flex-row gap-2">
+        <div className="w-full md:w-1/5">
+        <div className="hidden md:block">
+            <FilterCard />
+          </div>
+          <div className="block md:hidden">
+            <FilterCardMobail />
+          </div>
+        </div>
+
+        <div className="flex-1 h-[88vh] bg-secondary p-2 overflow-y-auto pb-5">
+          {jobs.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {jobs.map((job, i) => (
+                <JobCard key={i} job={job} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-600">
+              No jobs available at the moment.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

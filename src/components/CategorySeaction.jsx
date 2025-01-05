@@ -12,11 +12,11 @@ function CategorySection() {
     : joliCategories.slice(0, 13);
 
   return (
-    <div className="container mx-auto px-4 lg:px-28 py-8">
-      <h2 className="text-2xl font-bold text-center mb-5">
+    <div className="container mx-auto px-4 lg:px-28 pt-6 pb-2">
+      <h2 className="text-2xl font-bold mb-5">
         Explore Categories
       </h2>
-      <div className={`flex overflow-hidden showMore ${!showMore ? `md:flex-wrap`:`flex-wrap`} gap-3 py-2`} >
+      <div className={`flex overflow-hidden showMore md:justify-start ${!showMore ? `md:flex-wrap`:`flex-wrap justify-center`} gap-3 py-2`} >
         {categoriesToShow.map((item, i) => (
           <motion.div
             key={i}
@@ -30,10 +30,10 @@ function CategorySection() {
           </motion.div>
         ))}
       </div>
-      <div className="text-center mt-3">
+      <div className="mt-3 text-center md:text-start">
         <button
           onClick={() => setShowMore(!showMore)}
-          className="text-blue-500 hover:underline"
+          className="text-blue-500 md:font-medium md:border-primary/40 md:border md:rounded-md md:px-2 md:py-1 hover:underline"
         >
           {showMore ? "Show Less" : "Show More"}
         </button>

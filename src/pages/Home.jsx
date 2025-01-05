@@ -47,15 +47,15 @@ function Home() {
   }, [transitionTexts.length]);
 
   return (
-    <div className="bg-black  text-primary-foreground h-[800px] md:h-screen font-poppins md:px-5 px-4">
+    <div className="bg-gradient-to-l from-primary bg-black text-primary-foreground h-[800px] md:h-screen font-poppins md:px-5 px-4">
       {/* Navbar */}
       <div className="flex h-16 items-center justify-between">
-        <Link to="/" className="font-bold text-3xl">
+        <Link to="/" className="font-bold text-3xl text-white">
           JOLI
         </Link>
 
         <div className="flex items-center space-x-3">
-          <Button className="flex items-center border border-slate-700 hover:border-white hover:bg-black bg-black rounded px-4">
+          <Button className="flex items-center border border-slate-700 text-white hover:border-white hover:bg-black bg-black rounded px-4">
             <span>Get the app:</span>
             <div className="flex items-center ml-2">
               <img src={AppStore} className="w-8 h-9" alt="App Store" />
@@ -90,7 +90,7 @@ function Home() {
             </motion.div>
           </AnimatePresence>
           <motion.div
-            className="absolute top-32 md:-top-7 px-7 bg-primary rounded-full py-3 md:text-xl font-semibold flex items-center justify-center select-none"
+            className="absolute top-32 md:-top-7 px-7 text-white bg-primary rounded-full py-3 md:text-xl font-semibold flex items-center justify-center select-none"
             onClick={() => navigate("/jobs")}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}

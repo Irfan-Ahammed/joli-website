@@ -77,7 +77,7 @@ function Navbar() {
       </div>
 
       {/* Mobile Search Section */}
-      <div className="flex md:hidden mx-4 mb-5">
+      <div className="flex md:hidden  mx-4 mb-5">
         <div className="w-full h-12 border-slate-300 shadow-md items-center bg-primary/10 rounded-md relative flex shadow-primary/10">
           <Search className="size-6 ml-2 text-slate-700"/>
           <AnimatePresence>
