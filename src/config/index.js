@@ -98,3 +98,27 @@ export const filters = [
     options: ["Entry-Level", "Mid-Level", "Senior"],
   },
 ];
+export const updateUserProfile=[
+  {
+    name: "fullname",
+    label: "Full Name",
+    placeholder: "Enter your Full Name",
+    componentType: "input",
+    type: "text",
+  },
+  {
+    name: "phoneNumber",
+    label: "Phone Number",
+    placeholder: "Enter your Phone number",
+    componentType: "input",
+    type: "number",
+  },
+  {
+    name: "location",
+    label: "Phone Number",
+    placeholder: "Enter your Phone number",
+    componentType: "input",
+    type: "number",
+  },
+
+]

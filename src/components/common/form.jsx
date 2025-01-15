@@ -131,7 +131,7 @@ function CommonForm({
           <Button
             disabled={isBtnDisabled}
             type="submit"
-            className="mt-6 w-full"
+            className="mt-6 w-full text-white"
           >
             {buttonText || "Submit"}
           </Button>

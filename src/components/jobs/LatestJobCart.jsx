@@ -1,13 +1,13 @@
 import React from "react";
 import { Badge } from "../ui/badge";
 
-function LatestJobCart() {
+function LatestJobCart({key,job}) {
   return (
-    <div className="p-4 border rounded-lg shadow-md border-slate-200 bg-white hover:shadow-lg transition-shadow duration-200">
+    <div key={key} className="p-4 border rounded-lg shadow-md border-slate-200 bg-white hover:shadow-lg transition-shadow duration-200">
       {/* Company Info */}
       <div className="mb-3">
         <h2 className="text-lg font-bold">Company Name</h2>
-        <p className="text-sm text-gray-600">India</p>
+        <p className="text-sm text-gray-600">{job.location}</p>
       </div>
 
       {/* Job Info */}

@@ -16,11 +16,11 @@ function CategorySection() {
       <h2 className="text-2xl font-bold mb-5">
         Explore Categories
       </h2>
-      <div className={`flex overflow-hidden showMore md:justify-start ${!showMore ? `md:flex-wrap`:`flex-wrap justify-center`} gap-3 py-2`} >
+      <div className={`flex md:overflow-hidden showMore md:justify-start ${!showMore ? `md:flex-wrap  overflow-x-scroll`:` flex-wrap justify-center`} gap-3 py-2`} >
         {categoriesToShow.map((item, i) => (
           <motion.div
             key={i}
-            className="flex items-center w-auto md:px-3 px-1 py-1 md:min-w-20 bg-[#f7faff] border rounded-lg shadow-md cursor-pointer"
+            className="flex items-center min-w-max md:px-3 px-1 py-2 border-slate-200 md:min-w-20 bg-[#f7faff] border rounded-lg shadow-md cursor-pointer"
             onClick={() => navigate("/jobs")}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.8 }}

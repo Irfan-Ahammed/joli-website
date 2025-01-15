@@ -29,7 +29,7 @@ function ProfileDialog() {
         <Dialog>
           <DialogTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={user.profileImage || "https://via.placeholder.com/150"} alt="User Avatar" />
+              <AvatarImage className="object-cover" src={user.dpImage} alt="User Avatar" />
               <AvatarFallback>{user.fullname.charAt(0)}</AvatarFallback>
             </Avatar>
           </DialogTrigger>
@@ -42,11 +42,11 @@ function ProfileDialog() {
 
             {/* User Information */}
             <div className="flex items-center mb-4">
-              <Avatar className="w-16 h-16">
-                <AvatarImage src={user.profileImage || "https://via.placeholder.com/150"} alt="User Avatar" />
+              <Avatar  onClick={() => navigate("/profile")} className="w-16 h-16">
+                <AvatarImage className="object-cover" src={user.dpImage || "https://via.placeholder.com/150"} alt="User Avatar" />
                 <AvatarFallback>{user.fullname.charAt(0)}</AvatarFallback>
               </Avatar>
-              <div className="ml-4">
+              <div  onClick={() => navigate("/profile")} className="ml-4">
                 <h3 className="font-semibold text-lg">{user.fullname}</h3>
                 <p className="text-gray-500 text-sm">{user.email}</p>
               </div>

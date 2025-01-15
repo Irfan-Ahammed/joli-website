@@ -4,8 +4,11 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Bookmark } from "lucide-react";
 import { Badge } from "../ui/badge";
+import { useNavigate } from "react-router-dom";
 
 function JobCard({ job }) {
+  const navigate=useNavigate()
+  const jobId="ijctyasvdcbcssd"
   return (
     <div className="bg-white border-gray-100 shadow-lg rounded-md p-5">
       <div className="flex items-center justify-between">
@@ -44,7 +47,7 @@ function JobCard({ job }) {
         </Badge>
       </div>
       <div className="flex text-white mt-2 justify-between">
-        <Button className="bg-transparent border-black text-black border">
+        <Button onClick={()=>navigate(`/discription/${jobId}`)} className="bg-transparent border-black text-black border">
           Details
         </Button>
         <Button>Save For Later</Button>

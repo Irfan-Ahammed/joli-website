@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Jobs from "./pages/job/Jobs";
 import ErrorPage from "./components/ErrorPage";
 import Profile from "./pages/Profile";
+import JobsDescription from "./components/JobsDescription";
+import Search from "./pages/Search";
 
 const appRouter = createBrowserRouter(
   [
@@ -16,8 +18,16 @@ const appRouter = createBrowserRouter(
       element: <Jobs />,
     },
     {
-      path: "/jobs/profile",
+      path: "/discription/:id",
+      element: <JobsDescription />,
+    },
+    {
+      path: "/profile",
       element: <Profile />,
+    },
+    {
+      path: "/search",
+      element: <Search />,
     },
     {
       path: "*",

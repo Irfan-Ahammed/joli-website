@@ -21,6 +21,7 @@ import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTrigger } from 
 import ProfileDialog from "./ProfileDialog";
 
 function Navbar() {
+  const navigate=useNavigate()
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const transitionTexts = [
@@ -93,6 +94,7 @@ function Navbar() {
           <Search className="size-6 ml-2 text-slate-700" />
           <AnimatePresence>
             <motion.div
+            onClick={()=>navigate("/search")}
               key={transitionTexts[currentIndex]}
               className="absolute top-3 w-full font-normal text-slate-500 text-md"
               variants={textVariants}
