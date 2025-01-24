@@ -6,6 +6,7 @@ import ErrorPage from "./components/ErrorPage";
 import Profile from "./pages/Profile";
 import JobsDescription from "./components/JobsDescription";
 import Search from "./pages/Search";
+import Applicants from "./components/applicants/Applicants";
 
 const appRouter = createBrowserRouter(
   [
@@ -24,6 +25,10 @@ const appRouter = createBrowserRouter(
     {
       path: "/profile",
       element: <Profile />,
+    },
+    {
+      path: "/profile/:id/applicants",
+      element: <Applicants />,
     },
     {
       path: "/search",

@@ -1,37 +1,35 @@
 import React from "react";
-import {  TableBody, TableCaption, TableHead, TableHeader, TableRow, TableCell, Table } from "../ui/table"; // Ensure this is your custom component or library import
-import { Badge } from "../ui/badge"; // Badge for displaying the status
+import {
+  TableBody,
+  TableCaption,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableCell,
+  Table,
+} from "../ui/table";
+import { Badge } from "../ui/badge";
+import { useSelector } from "react-redux";
 
 const AppliedJobTable = () => {
-  const appliedJobs = [
-    {
-      date: "17-07-2024",
-      role: "Frontend Developer",
-      company: "Google",
-      status: "Selected",
-    },
-    {
-      date: "25-07-2024",
-      role: "Backend Developer",
-      company: "Amazon",
-      status: "Pending",
-    },
-    {
-      date: "30-07-2024",
-      role: "Fullstack Developer",
-      company: "Facebook",
-      status: "Rejected",
-    },
-    {
-      date: "05-08-2024",
-      role: "UI/UX Designer",
-      company: "Apple",
-      status: "Selected",
-    },
-  ];
+  const appliedJobs = useSelector((state) => state.job?.appliedJobs);
+  //  console.log("applied",appliedJobs);
+
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "Selected":
+        return "bg-green-100 text-green-800";
+      case "Pending":
+        return "bg-yellow-100 text-yellow-800";
+      case "Rejected":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
 
   return (
-    <div className="applied-job-table">
+    <div className="applied-job-table overflow-x-auto">
       <Table>
         <TableCaption>A list of your applied jobs</TableCaption>
         <TableHeader>
@@ -45,11 +43,15 @@ const AppliedJobTable = () => {
         <TableBody>
           {appliedJobs.map((job, index) => (
             <TableRow key={index}>
-              <TableCell>{job.date}</TableCell>
-              <TableCell>{job.role}</TableCell>
-              <TableCell>{job.company}</TableCell>
+              <TableCell>
+                {new Date(job.createdAt).toLocaleDateString()}
+              </TableCell>
+              <TableCell>{job.title}</TableCell>
+              <TableCell>{job.wage}</TableCell>
               <TableCell className="text-right">
-                <Badge>{job.status}</Badge>
+                <Badge className={getStatusClass(job.status)}>
+                  {job.status}
+                </Badge>
               </TableCell>
             </TableRow>
           ))}

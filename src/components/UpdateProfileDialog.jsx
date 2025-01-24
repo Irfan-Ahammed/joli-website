@@ -50,9 +50,7 @@ const UpdateProfileDialog = () => {
         `${USER_API_END_POINT}/profile/update`,
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          headers: { "Content-Type": "multipart/form-data" },
           withCredentials: true,
         }
       );
@@ -72,11 +70,13 @@ const UpdateProfileDialog = () => {
   return (
     <form onSubmit={submitHandler}>
       <div className="grid gap-4 py-4">
-        {[{ label: "Full Name", name: "fullname" }, 
-          { label: "Email", name: "email" }, 
-          { label: "Phone Number", name: "phoneNumber" }, 
-          { label: "Bio", name: "bio" }, 
-          { label: "Location", name: "location" }].map(({ label, name }) => (
+        {[
+          { label: "Full Name", name: "fullname" },
+          { label: "Email", name: "email" },
+          { label: "Phone Number", name: "phoneNumber" },
+          { label: "Bio", name: "bio" },
+          { label: "Location", name: "location" },
+        ].map(({ label, name }) => (
           <div key={name} className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor={name} className="text-right">
               {label}
@@ -103,7 +103,13 @@ const UpdateProfileDialog = () => {
           />
         </div>
         <Button
-          disabled={loading || !input.fullname || !input.email || !input.phoneNumber || !input.location}
+          disabled={
+            loading ||
+            !input.fullname ||
+            !input.email ||
+            !input.phoneNumber ||
+            !input.location
+          }
           type="submit"
           className="mt-6 w-full"
         >

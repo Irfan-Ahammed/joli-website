@@ -7,12 +7,19 @@ import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
 
 function JobCard({ job }) {
-  const navigate=useNavigate()
-  const jobId="ijctyasvdcbcssd"
+  const navigate = useNavigate();
+  const jobId = job._id;
+
+  const daysAgoFunction = (mongodbTime) => {
+    const createdAt = new Date(mongodbTime);
+    const currentTime = new Date();
+    const timeDifference = currentTime - createdAt;
+    return Math.floor(timeDifference / (1000 * 24 * 60 * 60));
+  };
   return (
     <div className="bg-white border-gray-100 shadow-lg rounded-md p-5">
       <div className="flex items-center justify-between">
-        <p className="text-sm font-bold text-slate-400 mb-2">2 days ago</p>
+        <p className="text-sm font-bold text-slate-400 mb-2">{daysAgoFunction(job?.createdAt)==0 ? "Today":`${daysAgoFunction(job?.createdAt)}`} Day's ago</p>
         <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
         </Button>
@@ -27,27 +34,30 @@ function JobCard({ job }) {
           </Button>
         </div>
         <div>
-          <h1>Company Name</h1>
-          <p>kerala</p>
+          <h1>{job.userFullname}</h1>
+          <p>{job.location}</p>
         </div>
       </div>
       <div>
-        <h1 className="font-bold text-lg my-2">title</h1>
-        <p className="text-sm text-gray-600">leio ewnhe wejk as sdlkd</p>
+        <h1 className="font-bold text-lg my-2">{job.title}</h1>
+        <p className="text-sm text-gray-600">{job.description}</p>
       </div>
       <div className="flex items-center mt-4 gap-2">
         <Badge className="text-primary font-bold" variant="ghost">
-          12 Positions
+          {job.jobType}
         </Badge>
         <Badge className="text-green-500 font-bold" variant="ghost">
-          Full-Time
+          {job.wage}
         </Badge>
-        <Badge className="text-red-500 font-bold" variant="ghost">
-          Remote
-        </Badge>
+        {/* <Badge className="text-red-500 font-bold" variant="ghost">
+       
+        </Badge> */}
       </div>
       <div className="flex text-white mt-2 justify-between">
-        <Button onClick={()=>navigate(`/discription/${jobId}`)} className="bg-transparent border-black text-black border">
+        <Button
+          onClick={() => navigate(`/discription/${jobId}`)}
+          className="bg-transparent border-black text-black border"
+        >
           Details
         </Button>
         <Button>Save For Later</Button>
