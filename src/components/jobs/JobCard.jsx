@@ -1,10 +1,10 @@
 import React from "react";
-import { Button } from "../ui/Button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Bookmark } from "lucide-react";
 import { Badge } from "../ui/badge";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
 
 function JobCard({ job }) {
   const navigate = useNavigate();

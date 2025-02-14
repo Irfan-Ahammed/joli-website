@@ -1,4 +1,4 @@
-import JobSearch from "@/components/jobs/JobSearch";
+import JobSearch from "@/components/jobs/Jobsearch";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import playstore from "../assets/playstore.png";

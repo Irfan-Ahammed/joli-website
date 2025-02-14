@@ -1,35 +1,60 @@
 import React from "react";
-import { Badge } from "../ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Bookmark, IndianRupee } from "lucide-react";
 
-function LatestJobCart({ job }) {
+function JobCard({ job }) {
   return (
-    <div className="p-4 border rounded-lg shadow-md border-slate-200 bg-white hover:shadow-lg transition-shadow duration-200">
-      {/* Company Info */}
-      <div className="mb-3">
-        <h2 className="text-lg font-bold">{job.userFullname}</h2>
-        <p className="text-sm text-gray-600">{job.location}</p>
+    <div className="bg-white text-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-slate-200 w-full max-w-sm mx-auto sm:w-96">
+      {/* Job Title */}
+      <h2 className="text-2xl font-bold mb-3 text-gray-800">{job.title}</h2>
+
+      {/* Job Description */}
+      <div className="space-y-2 mb-6">
+        <p className="text-sm text-gray-600 line-clamp-3">{job.description}</p>
       </div>
 
-      {/* Job Info */}
-      <div className="mb-3">
-        <h3 className="text-md font-semibold">{job.title}</h3>
-        <p className="text-sm text-gray-700">{job.description}</p>
+      {/* User Info Section */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-10 w-10 border-2 border-slate-300">
+            <AvatarImage
+              src={job.userImage || "https://via.placeholder.com/150"}
+              alt={job.userFullname}
+            />
+            <AvatarFallback className="bg-slate-100 text-slate-700">
+              {job.userFullname?.charAt(0) || "U"}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <span className="text-sm font-medium text-slate-700 block">
+              {job.userFullname}
+            </span>
+            <span className="text-xs text-slate-500">{job.location}</span>
+          </div>
+        </div>
+
+        {/* Bookmark Icon */}
+        <button className="text-gray-500 hover:text-gray-700 hover:bg-slate-100 rounded-full p-2 transition-colors duration-200 active:scale-95">
+          <Bookmark size={20} />
+        </button>
       </div>
 
-      {/* Job Details */}
-      <div className="flex flex-wrap gap-2">
-        <Badge className="text-primary font-bold" variant="ghost">
+      {/* Additional Details (e.g., Job Type, Wage) */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        <span className="bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full">
           {job.jobType}
-        </Badge>
-        <Badge className="text-green-500 font-bold" variant="ghost">
-          {job.wage}
-        </Badge>
-        {/* <Badge className="text-red-500 font-bold" variant="ghost">
-          
-        </Badge> */}
+        </span>
+        <span className="flex items-center justify-center bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">
+        <IndianRupee size={13}/> {job.wage}
+        </span>
       </div>
+
+      {/* Call-to-Action Button */}
+      <button className="w-full mt-6 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+        Apply Now
+      </button>
     </div>
   );
 }
 
-export default LatestJobCart;
+export default JobCard;
