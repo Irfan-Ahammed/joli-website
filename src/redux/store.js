@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
 import jobSlice from "./jobSlice";
 import applicationSlice from "./applicationSlice";
+import adminJobSlice from "./adminJobSlice";
 import { createRoot } from "react-dom/client";
 
 import {
@@ -20,11 +21,14 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  whitelist: ["auth"], // Only persist auth slice
 };
+
 
 const rootReducer = combineReducers({
   auth: authSlice,
   job: jobSlice,
+  adminJob: adminJobSlice,
   application: applicationSlice,
 });
 

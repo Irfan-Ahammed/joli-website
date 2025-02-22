@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TableBody,
   TableCaption,
@@ -6,18 +6,47 @@ import {
   TableHeader,
   TableRow,
   TableCell,
-  Table,
+  Table
 } from "../ui/table";
 import { Badge } from "../ui/badge";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { APPLICATION_API_END_POINT } from "@/utils/constant";
+import { setAppliedJob } from "@/redux/jobSlice";
+import { timeAgo } from "@/utils/timeAgo";
 
 const AppliedJobTable = () => {
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.user._id);
   const appliedJobs = useSelector((state) => state.job?.appliedJobs);
-  //  console.log("applied",appliedJobs);
+  console.log(appliedJobs);
+
+  useEffect(() => {
+    const fetchAppliedJobs = async () => {
+      try {
+        const res = await axios.get(
+          `${APPLICATION_API_END_POINT}/appliedJobsProfile/${userId}`,
+          {
+            withCredentials: true // Ensure cookies are sent
+          }
+        );
+        console.log("API Response:", res.data); // Debug the API response
+        if (Array.isArray(res.data.appliedJobs)) {
+          dispatch(setAppliedJob(res.data.appliedJobs));
+        } else {
+          console.error("Expected an array but got:", res.data.appliedJobs);
+          dispatch(setAppliedJob([])); // Set to empty array if not an array
+        }
+      } catch (error) {
+        console.error("Error fetching applied jobs:", error);
+      }
+    };
+    fetchAppliedJobs();
+  }, [dispatch, userId]);
 
   const getStatusClass = (status) => {
     switch (status) {
-      case "Selected":
+      case "Accepted":
         return "bg-green-100 text-green-800";
       case "Pending":
         return "bg-yellow-100 text-yellow-800";
@@ -36,25 +65,37 @@ const AppliedJobTable = () => {
           <TableRow>
             <TableHead>Date</TableHead>
             <TableHead>Job Role</TableHead>
-            <TableHead>Company</TableHead>
+            <TableHead>Salary</TableHead>
             <TableHead className="text-right">Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {appliedJobs.map((job, index) => (
-            <TableRow key={index}>
-              <TableCell>
-                {new Date(job.createdAt).toLocaleDateString()}
-              </TableCell>
-              <TableCell>{job.title}</TableCell>
-              <TableCell>{job.wage}</TableCell>
-              <TableCell className="text-right">
-                <Badge className={getStatusClass(job.status)}>
-                  {job.status}
-                </Badge>
+          {Array.isArray(appliedJobs) && appliedJobs.length > 0 ? (
+            appliedJobs.map((job, index) => (
+              <TableRow key={index}>
+                <TableCell>{timeAgo(job.createdAt)}</TableCell>
+                <TableCell>{job.title}</TableCell>
+                <TableCell>{job.wage}</TableCell>
+                <TableCell className="text-right">
+                  <Badge
+                    className={`${getStatusClass(
+                      job.applications[0].status
+                    )} hover:bg-transparent`}
+                  >
+                    {job.applications.length > 0
+                      ? job.applications[0].status
+                      : "Pending"}
+                  </Badge>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={4} className="text-center text-gray-500">
+                No jobs applied yet.
               </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </div>

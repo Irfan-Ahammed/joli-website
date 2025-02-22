@@ -27,10 +27,7 @@ const jobSlice = createSlice({
       state.createdJob = [...state.createdJob, action.payload];
     },
     setAppliedJob: (state, action) => {
-      if (!Array.isArray(state.appliedJobs)) {
-        state.appliedJobs=[]
-      }
-      state.appliedJobs = [...state.appliedJobs,action.payload]
+      state.appliedJobs = action.payload;
     },
   },
 });

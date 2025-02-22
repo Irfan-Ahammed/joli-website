@@ -9,6 +9,7 @@ import { setAllApplicants } from "@/redux/applicationSlice";
 function Applicants() {
   const params = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchAllApplicants = async () => {
       try {
@@ -16,23 +17,25 @@ function Applicants() {
           `${APPLICATION_API_END_POINT}/${params.id}/applicants`,
           { withCredentials: true }
         );
-        console.log(res.data);
-        
-        if (res.data.success) {
+
+        if (res.data.success && res.data.applications) {
           dispatch(setAllApplicants(res.data.applications));
+          console.log("Applicants fetched:", res.data.applications);
+        } else {
+          console.log("No applicants found.");
         }
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching applicants:", error);
       }
     };
-    fetchAllApplicants
-  }, []);
+
+    fetchAllApplicants();
+  }, [params.id, dispatch]); // Add dependencies
+
   return (
     <div>
-      <div>
-        <h1 className="font-bold text-xl my-5"> Applicants (3)</h1>
-        <ApplicantsTable />
-      </div>
+      <h1 className="font-bold text-xl my-5"> Applicants </h1>
+      <ApplicantsTable params={params}/>
     </div>
   );
 }

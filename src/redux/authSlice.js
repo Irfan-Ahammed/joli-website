@@ -9,15 +9,22 @@ export const logOut = createAsyncThunk(
     try {
       dispatch(setLoading(true)); // Set loading to true
       const res = await axios.post(`${USER_API_END_POINT}/logout`);
-      dispatch(setUser(null)); // Clear user data on logout
+      
+      // Clear localStorage
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+
+      dispatch(setUser(null)); // Clear user data in Redux
       dispatch(setLoading(false)); // Set loading to false
+
       return res.data;
     } catch (err) {
-      console.log("Logout failed:", err); // Log the error
+      console.log("Logout failed:", err);
       dispatch(setLoading(false)); // Ensure loading is reset
     }
   }
 );
+
 
 const authSlice = createSlice({
   name: "auth",

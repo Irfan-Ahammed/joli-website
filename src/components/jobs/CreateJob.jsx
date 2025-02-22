@@ -45,7 +45,6 @@ const CreateJob = () => {
         }
       );
       
-
       dispatch(CreatingJob(response.data.job));
       toast.success(response.data.message);
       setInput({

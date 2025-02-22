@@ -1,72 +1,91 @@
-import { Ellipsis, Eye, Pencil, Trash2 } from "lucide-react";
-import React from "react";
-import { useSelector } from "react-redux";
+import { Ellipsis, Eye, Pencil } from "lucide-react";
+import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { JOB_API_END_POINT } from "@/utils/constant";
+import { useDispatch, useSelector } from "react-redux";
+import { setAllAdminJob } from "@/redux/adminJobSlice";
+import { timeAgo } from "@/utils/timeAgo";
 
 const CreatedJobTable = () => {
-  const createdJobs = useSelector((state) => state.job?.createdJob);
-  // console.log(createdJobs);
+  const dispatch = useDispatch();
+  const createdJobs = useSelector((state) => state.adminJob?.createdJob);
+  
+  const userId = useSelector((state) => state.auth.user._id);
+
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await axios.get(`${JOB_API_END_POINT}/getadminjobs/${userId}`, {
+          withCredentials: true, // Ensure cookies are sent
+        });
+        dispatch(setAllAdminJob(res.data.jobs));
+      } catch (error) {
+        console.error("Error fetching admin jobs:", error);
+      }
+    };
+    fetchJobs();
+  }, [userId,dispatch]);
+
   if (!Array.isArray(createdJobs) || createdJobs.length === 0) {
-    return <p className="text-gray-500">You have not created any jobs yet.</p>;
+    return <p className="text-gray-500 text-center mt-4">You have not created any jobs yet.</p>;
   }
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="text-left px-4 py-2 font-medium text-gray-700">
-              Job Title
-            </th>
-            <th className="text-left px-4 py-2 font-medium text-gray-700">
-              Category
-            </th>
-            <th className="text-left px-4 py-2 font-medium text-gray-700">
-              Date Created
-            </th>
-            <th className="text-left px-4 py-2 font-medium text-gray-700">
-              Status
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {createdJobs.map((job, index) => (
-            <tr key={job.id || index} className="border-t hover:bg-gray-50">
-              <td className="px-4 py-2 text-gray-800">{job.title}</td>
-              <td className="px-4 py-2 text-gray-600">
-                {job.category || "N/A"}
-              </td>
-              <td className="px-4 py-2 text-gray-600">
-                {new Date(job.createdAt).toLocaleDateString()}
-              </td>
-              <td className="px-4 py-2 text-gray-600">
-                <Popover>
-                  <PopoverTrigger>
-                    <Ellipsis />
-                  </PopoverTrigger>
-                  <PopoverContent className="bg-white flex flex-col max-w-40">
-                    <Button className="bg-white flex items-center justify-between w-full  hover:bg-gray-100 rounded">
-                      <span>Edit</span>
-                      <Pencil />
-                    </Button>
-                    <Button
-                      onClick={() => navigate(`/profile/${job._id}/applicants`)}
-                      className="bg-white flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 rounded"
-                    >
-                      <span>Applicants</span>
-                      <Eye />
-                    </Button>
-                  </PopoverContent>
-                </Popover>
-              </td>
+      <div className="bg-white shadow-md rounded-xl overflow-hidden">
+        <table className="w-full border-collapse">
+          <thead className="bg-gray-100 text-gray-700 text-left uppercase text-sm">
+            <tr>
+              <th className="px-6 py-3 font-medium">Job Title</th>
+              <th className="px-6 py-3 font-medium">Category</th>
+              <th className="px-6 py-3 font-medium">Date Created</th>
+              <th className="px-6 py-3 font-medium text-center">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {createdJobs.map((job, index) => (
+              <tr key={job._id || index} className="hover:bg-gray-50">
+                <td className="px-6 py-4 text-gray-900 font-medium">{job.title}</td>
+                <td className="px-6 py-4 text-gray-600">{job.category || "N/A"}</td>
+                <td className="px-6 py-4 text-gray-600">
+                  {timeAgo(job.createdAt)}
+                </td>
+                <td className="px-6 py-4 text-center">
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button variant="ghost" size="sm" className="hover:bg-gray-200 rounded-full">
+                        <Ellipsis className="h-5 w-5" />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="bg-white shadow-lg rounded-md p-2 w-32">
+                      <Button
+                        variant="ghost"
+                        className="flex items-center w-full px-3 py-2 hover:bg-gray-100 rounded"
+                      >
+                        <Pencil className="h-4 w-4 mr-2" />
+                        Edit
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        onClick={() => navigate(`/profile/${job._id}/applicants`)}
+                        className="flex items-center w-full px-3 py-2 hover:bg-gray-100 rounded"
+                      >
+                        <Eye className="h-4 w-4 mr-2" />
+                        Applicants
+                      </Button>
+                    </PopoverContent>
+                  </Popover>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

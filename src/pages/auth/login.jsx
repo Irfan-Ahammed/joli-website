@@ -24,6 +24,7 @@ function AuthLogin({ openSignUp,setOpen }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialState);
+  
 
   const onSubmit = async (event) => {
     event.preventDefault();

@@ -16,6 +16,8 @@ import CreateJob from "@/components/jobs/CreateJob";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
+  console.log(user);
+  
 
   return (
     <div className="my-8 max-w-6xl mx-auto px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-6">

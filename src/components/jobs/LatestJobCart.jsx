@@ -4,7 +4,7 @@ import { Bookmark, IndianRupee } from "lucide-react";
 
 function JobCard({ job }) {
   return (
-    <div className="bg-white text-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-slate-200 w-full max-w-sm mx-auto sm:w-96">
+    <div className="bg-white text-gray-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-slate-200 w-full max-w-sm mx-auto ">
       {/* Job Title */}
       <h2 className="text-2xl font-bold mb-3 text-gray-800">{job.title}</h2>
 
