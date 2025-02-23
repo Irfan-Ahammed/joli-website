@@ -7,40 +7,46 @@ import Profile from "./pages/Profile";
 import JobsDescription from "./components/JobsDescription";
 import Search from "./pages/Search";
 import Applicants from "./components/applicants/Applicants";
+import UpdateJob from "./components/jobs/UpdateJob";
 
 const appRouter = createBrowserRouter(
   [
     {
       path: "/",
-      element: <Home />,
+      element: <Home />
     },
     {
       path: "/jobs",
-      element: <Jobs />,
+      element: <Jobs />
     },
     {
       path: "/discription/:id",
-      element: <JobsDescription />,
+      element: <JobsDescription />
     },
     {
       path: "/profile",
-      element: <Profile />,
+      element: <Profile />
     },
     {
       path: "/profile/:id/applicants",
-      element: <Applicants />,
+      element: <Applicants /> 
+    },
+    {
+      path: "/profile/update/:id",
+      element: <UpdateJob />
     },
     {
       path: "/search",
-      element: <Search />,
+      element: <Search />
     },
     {
       path: "*",
-      element: <ErrorPage />,
-    },
+      element: <ErrorPage />
+    }
   ],
   { basename: "/joli-website" }
 );
+
 
 function App() {
   return <RouterProvider router={appRouter} />;

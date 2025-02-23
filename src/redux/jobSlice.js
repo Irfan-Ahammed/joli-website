@@ -8,7 +8,7 @@ const jobSlice = createSlice({
     createdJob: [],
     createdSingleJob: null,
     appliedJobs: [],
-    appliedSingleJobs: null,
+    appliedSingleJobs: null
   },
   reducers: {
     setAllJobs: (state, action) => {
@@ -22,14 +22,24 @@ const jobSlice = createSlice({
     },
     CreatingJob: (state, action) => {
       if (!Array.isArray(state.createdJob)) {
-        state.createdJob = []; // Reset to an empty array if corrupted
+        state.createdJob = [];
       }
       state.createdJob = [...state.createdJob, action.payload];
     },
+    UpdatingJob: (state, action) => {
+      state.createdJob = state.createdJob.map((job) =>
+        job._id === action.payload._id ? action.payload : job
+      );
+      
+      // update singleJob if it's the same job being edited
+      if (state.singleJob && state.singleJob._id === action.payload._id) {
+        state.singleJob = action.payload;
+      }
+    },
     setAppliedJob: (state, action) => {
       state.appliedJobs = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const {
@@ -38,5 +48,6 @@ export const {
   CreatingJob,
   setAllAdminJob,
   setAppliedJob,
+  UpdatingJob
 } = jobSlice.actions;
 export default jobSlice.reducer;

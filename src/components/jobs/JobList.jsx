@@ -23,7 +23,7 @@ function JobList() {
           </div>
         </div>
 
-        <div className="flex-1 h-[88vh] bg-secondary p-2 overflow-y-auto pb-5">
+        <div className="flex-1 h-[88vh] bg-secondary p-4 rounded-xl overflow-y-auto p-1 pb-5">
           {allJobs.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {allJobs.map((job, i) => (

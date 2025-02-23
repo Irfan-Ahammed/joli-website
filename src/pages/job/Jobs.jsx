@@ -9,13 +9,13 @@ import React from "react";
 function Jobs() {
   useGetAllJobs()
   return (
-    <div className="overflow-x-hidden">
+    <div className="">
       <Navbar />
       <hr className="text-black/20"/>
       <CategorySeaction />
       <LatestJobs />
       <JobList />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

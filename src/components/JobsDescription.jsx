@@ -34,7 +34,7 @@ const JobDescription = () => {
         setIsApplied(true); //update the local state
         const updatedSingleJob = {
           ...singleJob,
-          applications: [...singleJob.applications, { applicant: user?._id }],
+          applications: [...singleJob.applications, { applicant: user?._id }]
         };
         dispatch(setSingleJob(updatedSingleJob)); //help us to real time UI updated
         dispatch(setAppliedJob(updatedSingleJob));
@@ -49,7 +49,7 @@ const JobDescription = () => {
     const fetchSingleJob = async () => {
       try {
         const res = await axios.get(`${JOB_API_END_POINT}/get/${jobId}`, {
-          withCredentials: true,
+          withCredentials: true
         });
         if (res.data.success) {
           dispatch(setSingleJob(res.data.job));
